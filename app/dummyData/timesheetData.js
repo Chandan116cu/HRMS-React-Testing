@@ -2,11 +2,11 @@ var data = [
 
 
     {
-        "task":"hrms",
-        "customer":"dell",
-        "project":"mobile app",
+        "task":"637--Offshore Development",
+        "customer":"BDF--BDF General Operating, LLC",
+        "project":"BDF104--DWEB DEVELOPMENT",
         "hours":"8",
-        "company":"Cyber US-Cyber Group Cyber US-Cyber Group Cyber US-Cyber Group Cyber US-Cyber Group",
+        "company":"Cyber India--Cyber Group India Pvt Ltd",
         "to":"23-09-2020",
         "from":"Jan 13",
         "status":"pending",

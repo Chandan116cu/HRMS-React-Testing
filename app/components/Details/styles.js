@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     PlusIcon : {
         width: 20,
         height: 20,
+    
         // margin:10,
     },
     textColor : {

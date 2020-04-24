@@ -1,5 +1,7 @@
 import {days,error,Loading} from '../../modules/actions/days';
 import {GET_TIMESHEET} from '../../services/api/api'
+import {BASE_URL_IDENTITY} from '../../config'
+import {GET_SHEET_ROUTE} from '../../constants'
 
 export function fetchSheets(data) {
     let formdata = new FormData();
@@ -9,7 +11,7 @@ export function fetchSheets(data) {
     
     return (dispatch) =>  {
       dispatch(Loading());
-      fetch('http://172.25.122.36/api/values/', {
+      fetch(BASE_URL_IDENTITY+GET_SHEET_ROUTE, {
       method: 'GET',
       headers: {
         'Accept': 'application/json',

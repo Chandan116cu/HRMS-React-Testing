@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, Alert, Modal, TextInput, Button, ActivityIndicator, ProgressBarAndroid } from 'react-native';
+import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, Alert, Modal, TextInput, Button, ActivityIndicator, ProgressBarAndroid, SectionList } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 import Details from '../../components/Details';
 import thunk from "redux-thunk";
@@ -41,6 +41,15 @@ class TimeSheetExpandedDetails extends Component {
   
   }
 
+   Item = ({ title }) => (
+    <View style={styles.item}>
+      <Text style={styles.title}>{title.customer}</Text>
+      <Text style={{fontSize:20}}>{title.hours}</Text>
+      <Text style={{fontSize:20}}>{title.company}</Text>
+    </View>
+  );
+  
+
   
   state = {
     showSheet: true,
@@ -58,6 +67,7 @@ class TimeSheetExpandedDetails extends Component {
       contentToShow = (
        this.props.timesheet.map((payload, index) => (
           <Details
+        
             key={index}
             data={payload}
             {...this.props} />
@@ -75,8 +85,8 @@ class TimeSheetExpandedDetails extends Component {
       <SafeAreaView>
 
 
-        <View>
-          <View style={{ flexDirection: "row", borderWidth: 1, borderColor: 'grey', marginLeft: 20, marginRight: 20, marginTop: 10 }}>
+
+          <View style={{ flexDirection: "row", borderWidth: 1,borderRadius: 10, borderColor: 'grey', marginLeft: 10, marginRight: 10, marginTop: 10 }}>
             <View style={{ width: '50%', padding: 15 }}>
               <Text>Begin Date</Text>
               <DatePicker
@@ -123,108 +133,127 @@ class TimeSheetExpandedDetails extends Component {
                 }} />
             </View>
           </View>
-          <View>
-            <View style={{ flexDirection: "row", justifyContent: "space-evenly", padding: 10, borderWidth: 1, marginLeft: 20, marginRight: 20, marginTop: 10, borderColor: 'grey' }}>
+          <ScrollView style={{padding:0, margin:0}}>
+            <View style={{ flexDirection: "column", justifyContent: "space-evenly", padding: 10,borderRadius:10, borderWidth: 1, marginLeft: 10, marginRight: 10, marginTop: 10, borderColor: 'grey' }}>
+              <View style={{flexDirection:"row", justifyContent:"space-around"}} >
+              <Text style={{ fontSize: 11 }}>S</Text>
+              <Text style={{ fontSize: 11 }}>M</Text>
+
+              <Text style={{ fontSize: 11 }}>T</Text>
+
+              <Text style={{ fontSize: 11 }}>W</Text>
+              <Text style={{ fontSize: 11 }}>T</Text>
+              <Text style={{ fontSize: 11 }}>F</Text>
+              <Text style={{ fontSize: 11 }}>S</Text>
+              </View>
+              <View style={{flexDirection:"row", justifyContent:"space-around"}}>
+              <TouchableOpacity onPress={() => this.ListAsPerDay("Sunday")}>
+                <ProgressCircle
+                  percent={100}
+                  radius={20}
+                  borderWidth={4}
+                  color="#228B22"
+                  shadowColor="#999"
+                  bgColor="#fff"
+                >
+                  <Text style={{ fontSize: 11 }}>8</Text>
+                </ProgressCircle>
+              </TouchableOpacity>
+
+              
+              
+              
               <TouchableOpacity day="Monday" onPress={() => this.ListAsPerDay("Monday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
 
                 >
-                  <Text style={{ fontSize: 11 }}>M</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.ListAsPerDay("Tuesday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>T</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.ListAsPerDay("Wednesday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>W</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.ListAsPerDay("Thrusday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>T</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.ListAsPerDay("Friday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>F</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={() => this.ListAsPerDay("Saturday")}>
                 <ProgressCircle
                   percent={100}
-                  radius={15}
+                  radius={20}
                   borderWidth={4}
-                  color="#3399FF"
+                  color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>S</Text>
+                  <Text style={{ fontSize: 11 }}>8</Text>
                 </ProgressCircle>
               </TouchableOpacity>
+              </View>
 
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Sunday")}>
-                <ProgressCircle
-                  percent={100}
-                  radius={15}
-                  borderWidth={4}
-                  color="#3399FF"
-                  shadowColor="#999"
-                  bgColor="#fff"
-                >
-                  <Text style={{ fontSize: 11 }}>S</Text>
-                </ProgressCircle>
-              </TouchableOpacity>
-            </View>
-            <View style={{ borderTopWidth: 2, borderColor: "#F4F2F2" }} />
-          </View>
-          <ScrollView>
+           
+
             
-            <View style={{ padding: 20, marginRight: 10, marginBottom: 500 }}>{contentToShow}</View>
+            </View>
+            
+       
+          
+            
+            <View style={{ paddingRight: 10,paddingLeft:10,paddingBottom:0,paddingTop:0, marginTop: 10, marginBottom: 200 }}>{contentToShow}</View>
           </ScrollView>
 
-        </View>
       </SafeAreaView>
     );
 

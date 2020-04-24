@@ -38,78 +38,47 @@ export default class Details extends Component {
   render() {
     
     return (
-      <View style={{flexDirection:"row"}} >
-        <View style={{borderRightWidth:1,maxWidth:30,marginTop:10}}>
-          <Text>{this.props.data.from}</Text>
-        <TouchableOpacity onPress={this.onClickHandler} >
-            <Image style={styles.PlusIcon} source={require('../../assets/icons/PlusIcon.png')} />
+      <View style={{flexDirection:"row",flex:1}} >
+        <View style={{borderRightWidth:1,maxWidth:30,marginTop:0}}>
+          <Text style={{width:30, height:50,marginRight:20}}>{this.props.data.from}</Text>
+          <TouchableOpacity onPress={this.onClickHandler} >
+            <Image  style={styles.PlusIcon} source={require('../../assets/icons/Edit.png')} />
+        </TouchableOpacity>
+          <TouchableOpacity onPress={this.onClickHandler} >
+            <Image  style={styles.PlusIcon} source={require('../../assets/icons/PlusIcon.png')} />
         </TouchableOpacity>
         </View>
-        <View style={{borderWidth:1,borderColor:'grey',width:'90%',padding:10,marginLeft:10,marginTop:10,backgroundColor:'#EAEAEA'}}>
+        <View style={{borderWidth:1,borderColor:'grey',width:'90%',padding:10,marginTop:0,marginRight:0,margin:10,backgroundColor:'#EAEAEA',flex:1,borderRadius:10}}>
           <View style={{flexDirection:"row"}}>
-          <View style={{marginLeft:20}}>
+            <View style={{width:190}}>
               <Text >Customer</Text>
-                  <Text style={{fontSize:20}}>{this.props.data.customer}</Text>
-              </View>
-              <View style={{maxWidth:'60%',marginLeft:40}}>
-              <Text>Company</Text>
-                  <Text style={{fontSize:20}}>{this.props.data.company}</Text>
-              </View>
+                  <Text style={{fontSize:15}}>{this.props.data.customer}</Text>
+            </View>
+            <View style={{marginLeft:0,width:200}}>
+                <Text >Project</Text>
+                <Text style={{fontSize:15}}>{this.props.data.project}</Text>
+          </View>
+            
           </View>
           <View style={{flexDirection:"row",marginTop:20}}>
-          <View style={{marginLeft:20}}>
-                <Text >Project</Text>
-                <Text style={{fontSize:20}}>{this.props.data.project}</Text>
-          </View>
-          <View style={{marginLeft:30}}>
-                <Text>Hours</Text>
-                <Text style={{fontSize:20}}>{this.props.data.hours}</Text>
-          </View>
+                <View style={{marginLeft:0,width:190}}>
+                  <Text>Task</Text>
+                  <Text style={{fontSize:15}}>{this.props.data.task}</Text>
+                </View>
+          
+                <View style={{marginLeft:0,flex:2}}>
+                  <Text>Hours</Text>
+                  <Text style={{fontSize:15,flex:2,fontSize:30}}>{this.props.data.hours}</Text>
+                </View>
           </View>
           
-        </View>
-        {/* <View style={{flexDirection:"row",flex:2}}>
- 
-        <View style={{borderRightWidth:2, borderColor:"#B1B1B1"}}>
-            <TouchableOpacity onPress={this.onClickHandler} >
-            <Image style={styles.PlusIcon} source={require('../../assets/icons/PlusIcon.png')} />
-            </TouchableOpacity>
-            </View>
-          <View style={styles.detail}>
-            <View>
-            <View style={{flexDirection:"row",justifyContent:"space-between",padding:10,width:"80%"}}>
-              <View >
-                <View>
-                <Text style={styles.headingColor}>Customer</Text>
-                </View>
-                
-                <Text style={styles.textColor}>{this.props.data.customer}</Text>
-              </View>
-              <View  style={{padding:5}} >
-                
-                <Text style={styles.headingColor}>Company</Text>
-                <View>
-                <Text style={styles.textColor}>{this.props.data.company}</Text>
-                </View>
-              </View>
-            </View>
-            <View
-            
-            style={{flexDirection:"row",justifyContent:"space-between",padding:10,width:"70%"}}>
-              <View >
-                <Text style={styles.headingColor}>Project</Text>
-                <Text style={styles.textColor}>{this.props.data.project}</Text>
-              </View>
-              <View >
-                <Text style={styles.headingColor}>Hours</Text>
-                <Text style={styles.textColor}>{this.props.data.hours}</Text>
-              </View>
-            </View>
-            </View>
-            
+          <View style={{maxWidth:500, marginTop:20}}>
+              <Text>Company</Text>
+              <Text style={{fontSize:15}}>{this.props.data.company}</Text>
           </View>
-     
-      </View> */}
+          
+          
+        </View>
       </View>
     );
   }
