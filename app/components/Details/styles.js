@@ -22,6 +22,14 @@ const styles = StyleSheet.create({
         borderColor: "#B0B0B0",
     },
     PlusIcon : {
+       
+        width: 20,
+        height: 20,
+    
+        // margin:10,
+    },
+    EditIcon : {
+        
         width: 20,
         height: 20,
     

@@ -41,10 +41,10 @@ export default class Details extends Component {
       <View style={{flexDirection:"row",flex:1}} >
         <View style={{borderRightWidth:1,maxWidth:30,marginTop:0}}>
           <Text style={{width:30, height:50,marginRight:20}}>{this.props.data.from}</Text>
-          <TouchableOpacity onPress={this.onClickHandler} >
-            <Image  style={styles.PlusIcon} source={require('../../assets/icons/Edit.png')} />
+          <TouchableOpacity onPress={this.onClickHandler} style={{ marginTop:50}}>
+            <Image  style={styles.EditIcon} source={require('../../assets/icons/Edit.png')} />
         </TouchableOpacity>
-          <TouchableOpacity onPress={this.onClickHandler} >
+          <TouchableOpacity onPress={this.onClickHandler} style={{ marginTop:60}} >
             <Image  style={styles.PlusIcon} source={require('../../assets/icons/PlusIcon.png')} />
         </TouchableOpacity>
         </View>
@@ -54,7 +54,7 @@ export default class Details extends Component {
               <Text >Customer</Text>
                   <Text style={{fontSize:15}}>{this.props.data.customer}</Text>
             </View>
-            <View style={{marginLeft:0,width:200}}>
+            <View style={{marginLeft:0,width:200,height:60}}>
                 <Text >Project</Text>
                 <Text style={{fontSize:15}}>{this.props.data.project}</Text>
           </View>
