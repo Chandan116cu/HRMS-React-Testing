@@ -148,30 +148,8 @@ var data = [
         "status":"approved",
         "day":"sunday"
     },
-    {
-        "empId":"13",
-        "task":"hrms-audi-13",
-        "customer":"audi",
-        "project":"mobile app",
-        "hours":"8",
-        "company":"Cyber",
-        "to":"23-07-2020",
-        "from":"12-06-2020",
-        "status":"approved",
-        "day":"sunday"
-    },
-    {
-        "empId":"14",
-        "task":"hrms-audi-14",
-        "customer":"audi",
-        "project":"mobile app",
-        "hours":"8",
-        "company":"Cyber",
-        "to":"23-07-2020",
-        "from":"12-06-2020",
-        "status":"approved",
-        "day":"sunday"
-    },
+   
+   
 ]
 
 export default data;

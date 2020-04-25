@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, Alert, Modal, T
 import ProgressCircle from 'react-native-progress-circle';
 import Details from '../../components/Details';
 import thunk from "redux-thunk";
+import DatePicker from "react-native-datepicker";
 import { connect } from 'react-redux';
 import { Navigation } from "react-native-navigation"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
@@ -15,7 +16,7 @@ class TimeSheetExpandedDetails extends Component {
 
   constructor(props) {
     super(props);
-
+    
   }
   
   componentDidMount() {
@@ -33,20 +34,11 @@ class TimeSheetExpandedDetails extends Component {
      fridayHours : this.hours["friday"],
      saturdayHours : this.hours["saturday"],
      sundayHours : this.hours["sunday"],
-     mondayIndex:this.index["mondayIndex"],
-    tuesdayIndex:this.index["tuesdayIndex"],
-    wednesdayIndex:this.index["wednesdayIndex"],
-    thursdayIndex:this.index["thursdayIndex"],
-    fridayIndex:this.index["fridayIndex"],
-    saturdayIndex:this.index["saturdayIndex"],
-    sundayIndex:this.index["sundayIndex"]
+     isDatePickerVisible: false
    })
    
   }
 
-  componentWillMount() {
-    
-  }
 
 
   ListAsPerDay =  (day) => {
@@ -61,9 +53,7 @@ class TimeSheetExpandedDetails extends Component {
   
   }
 
-  scrollToWednesday = () => {
-   
-  }
+ 
 
    Item = ({ title }) => (
     <View style={styles.item}>
@@ -133,7 +123,9 @@ class TimeSheetExpandedDetails extends Component {
     thursdayIndex:null,
     fridayIndex:null,
     saturdayIndex:null,
-    sundayIndex:null
+    sundayIndex:null,
+    isDatePickerVisible:false,
+    // setDatePickerVisibility:false
     // isLoading: false
   };
 
@@ -185,83 +177,165 @@ class TimeSheetExpandedDetails extends Component {
   )
 
   scrollToIndexMon = () => {
-    let randomIndex = Number(this.index["mondayIndex"]);
+    if(this.index["mondayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["mondayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexTue = () => {
-    let randomIndex = Number(this.index["tuesdayIndex"]);
+    if(this.index["tuesdayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["tuesdayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexWed = () => {
-    let randomIndex = Number(this.index["wednesdayIndex"]);
+    if(this.index["wednesdayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["wednesdayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexThur = () => {
-    let randomIndex = Number(this.index["thursdayIndex"]);
+    if(this.index["thursdayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["thursdayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexFri = () => {
-    let randomIndex = Number(this.index["fridayIndex"]);
+    if(this.index["fridayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["fridayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexSat = () => {
-    let randomIndex = Number(this.index["saturdayIndex"]);
+    if(this.index["saturdayIndex"]===""){
+      return;
+    }else{
+      let randomIndex = Number(this.index["saturdayIndex"]);
     this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
 
   scrollToIndexSun = () => {
-    let randomIndex = Number(this.index["sundayIndex"]);
-    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    if(this.index["sundayIndex"]===""){
+        return;
+    }else{
+      let randomIndex = Number(this.index["sundayIndex"]);
+      this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+    }
+    
   }
+
+ 
+
+  showDatePicker = async (selected) => {
+
+    if(selected==="Begin"){
+     await this.setState({check: "Begin",isDatePickerVisible: true})
+    }else if(selected==="End") {
+     await this.setState({check:"End",isDatePickerVisible: true})
+    }
+    
+  };
+
+  hideDatePicker = () => {
+    this.setState({isDatePickerVisible: false});
+  };
+
+  handleConfirm = async (date) => {
+    // console.warn("A date has been picked: ", date);
+    if(this.state.check==="Begin"){
+      await this.setState({
+        beginYear: date.getFullYear(),
+        beginMonth: date.getMonth(),
+        beginDate: date.getDate()
+      })
+    }else if(this.state.check==="End"){
+      await this.setState({
+        endYear: date.getFullYear(),
+        endMonth: date.getMonth(),
+        endDate: date.getDate()
+      })
+    }
+   
+  
+  this.setState({isDatePickerVisible: false});
+  };
 
 
   render() {
     
     let content;
-    let contentToShow;
-    if (this.state.showSheet === true && this.props.loading===false) {
-      contentToShow = (
-       this.props.timesheet.map((payload, index) => (
+    // let contentToShow;
+    // if (this.state.showSheet === true && this.props.loading===false) {
+    //   contentToShow = (
+    //    this.props.timesheet.map((payload, index) => (
 
-          this.countHours(payload,index),
-          <Details
+    //       this.countHours(payload,index),
+    //       <Details
             
-            key={index}
-            data={payload}
-            {...this.props} />
-        ))
-      )
-    }else {
+    //         key={index}
+    //         data={payload}
+    //         {...this.props} />
+    //     ))
+    //   )
+    // }else {
       
-       contentToShow = (
-      //  <ActivityIndicator size="large" color="blue" style={{alignContent:"center"}}/>
-       <ProgressBarAndroid/>
-       ) 
-      }
+    //    contentToShow = (
+    //   //  <ActivityIndicator size="large" color="blue" style={{alignContent:"center"}}/>
+    //    <ProgressBarAndroid/>
+    //    ) 
+    //   }
     
     content = (
       
       <SafeAreaView>
 
-
+        
 
           <View style={{ flexDirection: "row", borderWidth: 1,borderRadius: 10, borderColor: 'grey', marginLeft: 10, marginRight: 10, marginTop: 10 }}>
-            <View style={{ width: '50%', padding: 15 }}>
+            <View style={{ width: '50%', padding: 15 ,borderRightWidth:1}}>
+              <TouchableOpacity onPress={()=> {this.showDatePicker("Begin")}}>
               <Text>Begin Date</Text>
               <Text style={{fontSize:25,fontWeight:"900"}}>{this.state.beginDate+" "+this.months[this.state.beginMonth]}</Text>
               <Text style={{textAlign:"right",width:80}}>{this.state.beginYear}</Text>
-            
+              </TouchableOpacity>
+              <DateTimePickerModal
+           isVisible={this.state.isDatePickerVisible}
+            mode="date"
+            onConfirm={this.handleConfirm}
+            onCancel={this.hideDatePicker}
+        />
+           
             </View>
             <View style={{ width: '50%', padding: 15 }}>
-              <Text style={{marginLeft:25}}>End Date</Text>
-              <Text style={{marginLeft:25,fontSize:25,fontWeight:"900"}}>{this.state.endDate+" "+this.months[this.state.endMonth]}</Text>
-              <Text style={{marginLeft:25,textAlign:"right",width:80}}>{this.state.endYear}</Text>
-            
+              <TouchableOpacity onPress={()=>{this.showDatePicker("End")}}>
+              <Text style={{marginLeft:40}}>End Date</Text>
+              <Text style={{marginLeft:40,fontSize:25,fontWeight:"900"}}>{this.state.endDate+" "+this.months[this.state.endMonth]}</Text>
+              <Text style={{marginLeft:40,textAlign:"right",width:80}}>{this.state.endYear}</Text>
+              </TouchableOpacity>
+              
+             
             </View>
           </View>
          
@@ -280,19 +354,20 @@ class TimeSheetExpandedDetails extends Component {
               <View style={{flexDirection:"row", justifyContent:"space-around"}}>
               <TouchableOpacity onPress={this.scrollToIndexSun}>
                 <ProgressCircle
-                  percent={((this.state.sundayHours/2)/8)*100}
+                  percent={((this.state.sundayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.sundayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.sundayHours}</Text>
+                 
                 </ProgressCircle>
               </TouchableOpacity>
               <TouchableOpacity onPress={this.scrollToIndexMon}>
                 <ProgressCircle
-                  percent={((this.state.mondayHours/2)/8)*100}
+                  percent={((this.state.mondayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
@@ -300,72 +375,72 @@ class TimeSheetExpandedDetails extends Component {
                   bgColor="#fff"
 
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.mondayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.mondayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.scrollToIndexTue}>
                 <ProgressCircle
-                  percent={((this.state.tuesdayHours/2)/8)*100}
+                  percent={((this.state.tuesdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.tuesdayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.tuesdayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.scrollToIndexWed}>
                 <ProgressCircle
-                  percent={((this.state.wednesdayHours/2)/8)*100}
+                  percent={((this.state.wednesdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.wednesdayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.wednesdayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.scrollToIndexThur}>
                 <ProgressCircle
-                  percent={((this.state.thursdayHours/2)/8)*100}
+                  percent={((this.state.thursdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.thursdayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.thursdayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.scrollToIndexFri}>
                 <ProgressCircle
-                  percent={((this.state.fridayHours/2)/8)*100}
+                  percent={((this.state.fridayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.fridayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.fridayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
               <TouchableOpacity onPress={this.scrollToIndexSat}>
                 <ProgressCircle
-                  percent={((this.state.saturdayHours/2)/8)*100}
+                  percent={((this.state.saturdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.saturdayHours/2}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.saturdayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
               </View>
@@ -374,7 +449,7 @@ class TimeSheetExpandedDetails extends Component {
 
             
             </View>
-            
+           
        
             {/* <ScrollView scrollToOverflowEnabled={true} ref={ref => {
             this.scrollview_ref = ref;
@@ -386,7 +461,7 @@ class TimeSheetExpandedDetails extends Component {
         getItemLayout={this.getItemLayout}
         ref={(ref) => { this.flatListRef = ref; }}
         
-        contentContainerStyle={{ paddingBottom: 450,flexDirection:"column"}}
+        contentContainerStyle={{ paddingBottom: 420,flexDirection:"column"}}
        style={{ paddingRight: 10,paddingLeft:10, marginTop: 10 }}
         data={this.props.timesheet}
         renderItem=  {({item,index}) => (
@@ -400,6 +475,7 @@ class TimeSheetExpandedDetails extends Component {
         keyExtractor={item => item.empId}>
 
         </FlatList>
+        
 
       </SafeAreaView>
     );
