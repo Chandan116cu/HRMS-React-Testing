@@ -38,14 +38,38 @@ var data = [
         "day":"tuesday"
     },
     {
-        "empId":"4",
+        "empId":"8",
         "task":"hrms-audi",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"8",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
+        "status":"approved",
+        "day":"tuesday"
+    },
+    {
+        "empId":"4",
+        "task":"hrms-ganga",
         "customer":"audi",
         "project":"mobile app",
         "hours":"4",
         "company":"Cyber",
         "to":"23-07-2020",
         "from":"Apr 12",
+        "status":"approved",
+        "day":"wednesday"
+    },
+    {
+        "empId":"9",
+        "task":"hrms-audi",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"8",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
         "status":"approved",
         "day":"wednesday"
     },
@@ -62,11 +86,23 @@ var data = [
         "day":"thursday"
     },
     {
+        "empId":"10",
+        "task":"hrms-audi",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"2",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
+        "status":"approved",
+        "day":"thursday"
+    },
+    {
         "empId":"6",
         "task":"hrms-audi",
         "customer":"audi",
         "project":"mobile app",
-        "hours":"8",
+        "hours":"2",
         "company":"Cyber",
         "to":"23-07-2020",
         "from":"Jun 23",
@@ -85,45 +121,48 @@ var data = [
         "status":"approved",
         "day":"saturday"
     },
-    {
-        "empId":"8",
-        "task":"hrms-audi",
-        "customer":"audi",
-        "project":"mobile app",
-        "hours":"8",
-        "company":"Cyber",
-        "to":"23-07-2020",
-        "from":"12-06-2020",
-        "status":"approved",
-        "day":"tuesday"
-    },
-    {
-        "empId":"9",
-        "task":"hrms-audi",
-        "customer":"audi",
-        "project":"mobile app",
-        "hours":"8",
-        "company":"Cyber",
-        "to":"23-07-2020",
-        "from":"12-06-2020",
-        "status":"approved",
-        "day":"wednesday"
-    },
-    {
-        "empId":"10",
-        "task":"hrms-audi",
-        "customer":"audi",
-        "project":"mobile app",
-        "hours":"2",
-        "company":"Cyber",
-        "to":"23-07-2020",
-        "from":"12-06-2020",
-        "status":"approved",
-        "day":"thursday"
-    },
+    
+
+    
     {
         "empId":"11",
-        "task":"hrms-audi",
+        "task":"hrms-audi-11",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"8",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
+        "status":"approved",
+        "day":"sunday"
+    },
+    {
+        "empId":"12",
+        "task":"hrms-audi-12",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"8",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
+        "status":"approved",
+        "day":"sunday"
+    },
+    {
+        "empId":"13",
+        "task":"hrms-audi-13",
+        "customer":"audi",
+        "project":"mobile app",
+        "hours":"8",
+        "company":"Cyber",
+        "to":"23-07-2020",
+        "from":"12-06-2020",
+        "status":"approved",
+        "day":"sunday"
+    },
+    {
+        "empId":"14",
+        "task":"hrms-audi-14",
         "customer":"audi",
         "project":"mobile app",
         "hours":"8",

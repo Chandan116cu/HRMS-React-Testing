@@ -41,6 +41,7 @@ class TimeSheetExpandedDetails extends Component {
     saturdayIndex:this.index["saturdayIndex"],
     sundayIndex:this.index["sundayIndex"]
    })
+   
   }
 
   componentWillMount() {
@@ -61,11 +62,7 @@ class TimeSheetExpandedDetails extends Component {
   }
 
   scrollToWednesday = () => {
-    this.scrollview_ref.scrollTo({
-      x: 0,
-      y: Number(this.state.wednesdayIndex),
-      animated: true,
-    });
+   
   }
 
    Item = ({ title }) => (
@@ -144,45 +141,87 @@ class TimeSheetExpandedDetails extends Component {
 
   countHours = (data,index) => {
     if(data.day=="monday"){
-          if(this.state.mondayIndex==null){
-            this.index[data.day] = index;
+     
+          if(this.index["mondayIndex"]===""){
+            this.index["mondayIndex"] = index;
           }
           this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);        
-    }else if(data.day=="tuesday"){
-      if(this.state.thursdayIndex==null){
-        this.index[data.day] = index;
-      }      
+    }else if(data.day==="tuesday"){
+      if(this.index["tuesdayIndex"]===""){
+        this.index["tuesdayIndex"] = index;
+      }    
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
-    }else if(data.day=="wednesday"){
-      if(this.state.wednesdayIndex==null){
-        this.index[data.day] = index;
-      }
+    }else if(data.day==="wednesday"){
+
+      if(this.index["wednesdayIndex"]===""){
+        this.index["wednesdayIndex"] = index;
+      } 
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
-    }else if(data.day=="thursday"){
-      if(this.state.thursdayIndex==null){
-        this.index[data.day] = index;
-      }
+    }else if(data.day==="thursday"){
+      if(this.index["thursdayIndex"]===""){
+        this.index["thursdayIndex"] = index;
+      } 
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
-    }else if(data.day=="friday"){
-      if(this.state.fridayIndex==null){
-        this.index[data.day] = index;
-      }
+    }else if(data.day==="friday"){
+      if(this.index["fridayIndex"]===""){
+        this.index["fridayIndex"] = index;
+      } 
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
-    }else if(data.day=="saturday"){
-      if(this.state.saturdayIndex==null){
-        this.index[data.day] = index;
-      }
+    }else if(data.day==="saturday"){
+      if(this.index["saturdayIndex"]===""){
+        this.index["saturdayIndex"] = index;
+      } 
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
-    }else if(data.day=="sunday"){
-      if(this.state.sundayIndex==null){
-        this.index[data.day] = index;
-      }
+    }else if(data.day==="sunday"){
+      if(this.index["sundayIndex"]===""){
+        this.index["sundayIndex"] = index;
+      } 
       this.hours[data.day] = Number(this.hours[data.day]) + Number(data.hours);
     }
   }
 
+  getItemLayout = (data, index) => (
+    { length: 50, offset: 241 * index, index }
+  )
+
+  scrollToIndexMon = () => {
+    let randomIndex = Number(this.index["mondayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexTue = () => {
+    let randomIndex = Number(this.index["tuesdayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexWed = () => {
+    let randomIndex = Number(this.index["wednesdayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexThur = () => {
+    let randomIndex = Number(this.index["thursdayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexFri = () => {
+    let randomIndex = Number(this.index["fridayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexSat = () => {
+    let randomIndex = Number(this.index["saturdayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
+  scrollToIndexSun = () => {
+    let randomIndex = Number(this.index["sundayIndex"]);
+    this.flatListRef.scrollToIndex({animated: true, index: randomIndex});
+  }
+
 
   render() {
+    
     let content;
     let contentToShow;
     if (this.state.showSheet === true && this.props.loading===false) {
@@ -239,98 +278,94 @@ class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>S</Text>
               </View>
               <View style={{flexDirection:"row", justifyContent:"space-around"}}>
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Sunday")}>
+              <TouchableOpacity onPress={this.scrollToIndexSun}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.sundayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.sundayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.sundayHours/2}</Text>
+                </ProgressCircle>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={this.scrollToIndexMon}>
+                <ProgressCircle
+                  percent={((this.state.mondayHours/2)/8)*100}
+                  radius={20}
+                  borderWidth={4}
+                  color="#228B22"
+                  shadowColor="#999"
+                  bgColor="#fff"
+
+                >
+                  <Text style={{ fontSize: 11 }}>{this.state.mondayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
-              
-              
-              
-              <TouchableOpacity day="Monday" onPress={() => this.ListAsPerDay("Monday")}>
+              <TouchableOpacity onPress={this.scrollToIndexTue}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.tuesdayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
-
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.mondayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.tuesdayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Tuesday")}>
+              <TouchableOpacity onPress={this.scrollToIndexWed}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.wednesdayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.tuesdayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.wednesdayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.scrollToWednesday()}>
+              <TouchableOpacity onPress={this.scrollToIndexThur}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.thursdayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.wednesdayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.thursdayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Thrusday")}>
+              <TouchableOpacity onPress={this.scrollToIndexFri}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.fridayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.thursdayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.fridayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
 
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Friday")}>
+              <TouchableOpacity onPress={this.scrollToIndexSat}>
                 <ProgressCircle
-                  percent={100}
+                  percent={((this.state.saturdayHours/2)/8)*100}
                   radius={20}
                   borderWidth={4}
                   color="#228B22"
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.fridayHours}</Text>
-                </ProgressCircle>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => this.ListAsPerDay("Saturday")}>
-                <ProgressCircle
-                  percent={100}
-                  radius={20}
-                  borderWidth={4}
-                  color="#228B22"
-                  shadowColor="#999"
-                  bgColor="#fff"
-                >
-                  <Text style={{ fontSize: 11 }}>{this.state.saturdayHours}</Text>
+                  <Text style={{ fontSize: 11 }}>{this.state.saturdayHours/2}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
               </View>
@@ -348,19 +383,20 @@ class TimeSheetExpandedDetails extends Component {
             <View style={{ paddingRight: 10,paddingLeft:10,paddingBottom:0,paddingTop:0, marginTop: 10, marginBottom: 200 }}>{contentToShow}</View>
         </ScrollView> */}
         <FlatList 
-       
+        getItemLayout={this.getItemLayout}
+        ref={(ref) => { this.flatListRef = ref; }}
+        
+        contentContainerStyle={{ paddingBottom: 450,flexDirection:"column"}}
+       style={{ paddingRight: 10,paddingLeft:10, marginTop: 10 }}
         data={this.props.timesheet}
-        renderItem=  {
-          ((payload, index) => (
-
-            this.countHours(payload,index),
-            <Details
-              
+        renderItem=  {({item,index}) => (
+          this.countHours(item,index),
+             <Details
               key={index}
-              data={payload}
+              data={item}
               {...this.props} />
-          ))
-        }
+        )}
+       
         keyExtractor={item => item.empId}>
 
         </FlatList>
