@@ -20,6 +20,9 @@ class TimeSheetExpandedDetails extends Component {
   }
   
   componentDidMount() {
+    this.props.timesheet.map(async(item,index)=>{
+      await this.countHours(item,index)
+     })
     // let data = {
     //   day: null,
     //   from: this.props.from,
@@ -36,6 +39,8 @@ class TimeSheetExpandedDetails extends Component {
      sundayHours : this.hours["sunday"],
      isDatePickerVisible: false
    })
+
+   
    
   }
 
@@ -70,7 +75,7 @@ class TimeSheetExpandedDetails extends Component {
     "thursdayIndex":"",
     "fridayIndex":"",
     "saturdayIndex":"",
-    "sundayIndex":""
+    "sundayIndex":"",
   }
  
   hours = {
@@ -131,7 +136,8 @@ class TimeSheetExpandedDetails extends Component {
 
 
 
-  countHours = (data,index) => {
+  countHours =async (data,index) => {
+    console.log("1")
     if(data.day=="monday"){
      
           if(this.index["mondayIndex"]===""){
@@ -252,8 +258,6 @@ class TimeSheetExpandedDetails extends Component {
 
     if(selected==="Begin"){
      await this.setState({check: "Begin",isDatePickerVisible: true})
-    }else if(selected==="End") {
-     await this.setState({check:"End",isDatePickerVisible: true})
     }
     
   };
@@ -262,20 +266,21 @@ class TimeSheetExpandedDetails extends Component {
     this.setState({isDatePickerVisible: false});
   };
 
-  handleConfirm = async (date) => {
-    // console.warn("A date has been picked: ", date);
+  handleConfirm =  (date) => {
     if(this.state.check==="Begin"){
-      await this.setState({
-        beginYear: date.getFullYear(),
-        beginMonth: date.getMonth(),
-        beginDate: date.getDate()
-      })
-    }else if(this.state.check==="End"){
-      await this.setState({
-        endYear: date.getFullYear(),
-        endMonth: date.getMonth(),
-        endDate: date.getDate()
-      })
+      var checkDay = date.getDay()
+      if(checkDay==1){
+         this.setState({
+          beginYear: date.getFullYear(),
+          beginMonth: date.getMonth(),
+          beginDate: date.getDate(),
+          endDate: date.getDate(date.setDate(date.getDate() + 6)),
+          endYear: date.getFullYear(date.setDate(date.getDate() + 6)),
+          endMonth: date.getMonth(date.setDate(date.getDate() + 6))
+        })
+      }else{
+        alert("Select date correspond to Monday")
+      }
     }
    
   
@@ -286,33 +291,10 @@ class TimeSheetExpandedDetails extends Component {
   render() {
     
     let content;
-    // let contentToShow;
-    // if (this.state.showSheet === true && this.props.loading===false) {
-    //   contentToShow = (
-    //    this.props.timesheet.map((payload, index) => (
-
-    //       this.countHours(payload,index),
-    //       <Details
-            
-    //         key={index}
-    //         data={payload}
-    //         {...this.props} />
-    //     ))
-    //   )
-    // }else {
-      
-    //    contentToShow = (
-    //   //  <ActivityIndicator size="large" color="blue" style={{alignContent:"center"}}/>
-    //    <ProgressBarAndroid/>
-    //    ) 
-    //   }
     
     content = (
       
       <SafeAreaView>
-
-        
-
           <View style={{ flexDirection: "row", borderWidth: 1,borderRadius: 10, borderColor: 'grey', marginLeft: 10, marginRight: 10, marginTop: 10 }}>
             <View style={{ width: '50%', padding: 15 ,borderRightWidth:1}}>
               <TouchableOpacity onPress={()=> {this.showDatePicker("Begin")}}>
@@ -329,11 +311,11 @@ class TimeSheetExpandedDetails extends Component {
            
             </View>
             <View style={{ width: '50%', padding: 15 }}>
-              <TouchableOpacity onPress={()=>{this.showDatePicker("End")}}>
+              
               <Text style={{marginLeft:40}}>End Date</Text>
               <Text style={{marginLeft:40,fontSize:25,fontWeight:"900"}}>{this.state.endDate+" "+this.months[this.state.endMonth]}</Text>
               <Text style={{marginLeft:40,textAlign:"right",width:80}}>{this.state.endYear}</Text>
-              </TouchableOpacity>
+         
               
              
             </View>
@@ -361,7 +343,8 @@ class TimeSheetExpandedDetails extends Component {
                   shadowColor="#999"
                   bgColor="#fff"
                 >
-                  <Text style={{ fontSize: 11 }}>{this.state.sundayHours}</Text>
+                  {/* <Text style={{ fontSize: 11 }}>{this.state.sundayHours}</Text> */}
+                  <Text style={{ fontSize: 11 }}>{this.hours["sunday"]}</Text>
                  
                 </ProgressCircle>
               </TouchableOpacity>
@@ -444,28 +427,15 @@ class TimeSheetExpandedDetails extends Component {
                 </ProgressCircle>
               </TouchableOpacity>
               </View>
-
-           
-
-            
             </View>
            
-       
-            {/* <ScrollView scrollToOverflowEnabled={true} ref={ref => {
-            this.scrollview_ref = ref;
-          }} style={{padding:0, margin:0}}>
-            
-            <View style={{ paddingRight: 10,paddingLeft:10,paddingBottom:0,paddingTop:0, marginTop: 10, marginBottom: 200 }}>{contentToShow}</View>
-        </ScrollView> */}
         <FlatList 
         getItemLayout={this.getItemLayout}
         ref={(ref) => { this.flatListRef = ref; }}
-        
         contentContainerStyle={{ paddingBottom: 420,flexDirection:"column"}}
        style={{ paddingRight: 10,paddingLeft:10, marginTop: 10 }}
         data={this.props.timesheet}
-        renderItem=  {({item,index}) => (
-          this.countHours(item,index),
+        renderItem=  { ({item,index}) =>  (
              <Details
               key={index}
               data={item}
@@ -475,8 +445,6 @@ class TimeSheetExpandedDetails extends Component {
         keyExtractor={item => item.empId}>
 
         </FlatList>
-        
-
       </SafeAreaView>
     );
 
