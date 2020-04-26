@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import TimeSheet from '../../components/TimeSheetDetails'
 import {LayoutRoot} from 'react-native-navigation'
-
+import styles from './style';
 class DashBoard extends Component {
     
     
@@ -16,14 +16,25 @@ class DashBoard extends Component {
             {...this.props}/>
             )))
         return(
-            <View>
-                <ScrollView>
-                <View>{content}</View>
-                {/* <LayoutRoot/> */}
-                </ScrollView>
-            </View>
-        )
+            <View style={styles.container}>
+      <Grid style={styles.GridViewContainer}>
+        <Col>
+          <Col  onPress={ this.alerta}  style={{backgroundColor: '#d6d6c2', margin:10 }}><Text style={styles.GridViewTextLayout}>Add Timesheet</Text></Col>
+          <Row   onPress={ this.alerta}  style={{backgroundColor: '#d6d6c2',margin:10 }}><Text style={styles.GridViewTextLayout}>My Submissions</Text></Row>
+        </Col>
+        <Col>
+          <Row  onPress={ this.alerta}  style={{backgroundColor: '#d6d6c2',margin:10 }}><Text style={styles.GridViewTextLayout}>My Approvals</Text></Row>
+          <Row  onPress={ this.alerta}  style={{backgroundColor: '#d6d6c2',margin:10 }}><Text style={styles.GridViewTextLayout}>Contact</Text></Row>
+        </Col>
+      </Grid>
+      </View>
+      
+    );
+        
     }
+    alerta(){
+        Alert.alert('testing');
+   }
 }
 mapStateToProps=(state)=> {
     const { timeSheets } = state
