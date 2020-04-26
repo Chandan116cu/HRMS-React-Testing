@@ -1,22 +1,17 @@
 import React, { Component } from "react";
-import { Text, View, TouchableOpacity, ScrollView, SafeAreaView, Alert, Modal, TextInput, Button, ActivityIndicator, ProgressBarAndroid, SectionList, FlatList } from 'react-native';
+import { Text,Dimensions, View, TouchableOpacity,SafeAreaView, FlatList } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
+import AsyncStorage from '@react-native-community/async-storage';
 import Details from '../../components/Details';
-import thunk from "redux-thunk";
-import DatePicker from "react-native-datepicker";
 import { connect } from 'react-redux';
-import { Navigation } from "react-native-navigation"
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { bindActionCreators } from 'redux';
 import fetchSheets from '../../services/api/fetchSheets'
-import {Loading} from '../../modules/actions/days'
-
 // import styles from "../../components/Details/styles";
 class TimeSheetExpandedDetails extends Component {
 
   constructor(props) {
     super(props);
-    
   }
   
   componentDidMount() {
@@ -130,14 +125,23 @@ class TimeSheetExpandedDetails extends Component {
     saturdayIndex:null,
     sundayIndex:null,
     isDatePickerVisible:false,
+    // selected: (new Map([String],[Boolean]))
     // setDatePickerVisibility:false
     // isLoading: false
   };
 
-
+  color = (value) => {
+      if(value>=8){
+        return "#228B22"
+      }else if(value>0) {
+        return "#800000"
+      }else {
+        return "Grey"
+      }
+  }
 
   countHours =async (data,index) => {
-    console.log("1")
+
     if(data.day=="monday"){
      
           if(this.index["mondayIndex"]===""){
@@ -266,9 +270,14 @@ class TimeSheetExpandedDetails extends Component {
     this.setState({isDatePickerVisible: false});
   };
 
-  handleConfirm =  (date) => {
+  handleConfirm =  async (date) => {
     if(this.state.check==="Begin"){
       var checkDay = date.getDay()
+      
+      
+     
+      
+      
       if(checkDay==1){
          this.setState({
           beginYear: date.getFullYear(),
@@ -278,6 +287,16 @@ class TimeSheetExpandedDetails extends Component {
           endYear: date.getFullYear(date.setDate(date.getDate() + 6)),
           endMonth: date.getMonth(date.setDate(date.getDate() + 6))
         })
+        await AsyncStorage.setItem('@BeginDate', JSON.stringify(this.state.beginDate));
+        await AsyncStorage.setItem('@BeginMonth',JSON.stringify(this.state.beginMonth));
+        await AsyncStorage.setItem('@BeginYear', JSON.stringify( this.state.beginYear));
+
+
+        await AsyncStorage.setItem('@EndDate',JSON.stringify( this.state.endDate) )
+        await AsyncStorage.setItem('@EndMonth', JSON.stringify (this.state.endMonth) )
+        await AsyncStorage.setItem('@EndYear',JSON.stringify( this.state.endYear) )
+        
+    
       }else{
         alert("Select date correspond to Monday")
       }
@@ -286,12 +305,21 @@ class TimeSheetExpandedDetails extends Component {
   
   this.setState({isDatePickerVisible: false});
   };
-
+   
+  // _onPressItem = (id) => {
+  //   // updater functions are preferred for transactional updates
+  //   this.setState((state) => {
+  //     // copy the map rather than modifying state.
+  //     const selected = new Map(state.selected);
+  //     selected.set(id, !selected.get(id)); // toggle
+  //     return {selected};
+  //   });
+  // };
+ 
 
   render() {
     
     let content;
-    
     content = (
       
       <SafeAreaView>
@@ -336,10 +364,11 @@ class TimeSheetExpandedDetails extends Component {
               <View style={{flexDirection:"row", justifyContent:"space-around"}}>
               <TouchableOpacity onPress={this.scrollToIndexSun}>
                 <ProgressCircle
+                
                   percent={((this.state.sundayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.sundayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
                 >
@@ -353,7 +382,7 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.mondayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.mondayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
 
@@ -367,7 +396,7 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.tuesdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.tuesdayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
                 >
@@ -380,10 +409,12 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.wednesdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.wednesdayHours))}
+                  
                   shadowColor="#999"
-                  bgColor="#fff"
+                  bgColor="#ffff"
                 >
+                 
                   <Text style={{ fontSize: 11 }}>{this.state.wednesdayHours}</Text>
                 </ProgressCircle>
               </TouchableOpacity>
@@ -393,7 +424,7 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.thursdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.thursdayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
                 >
@@ -406,7 +437,7 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.fridayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.fridayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
                 >
@@ -419,7 +450,7 @@ class TimeSheetExpandedDetails extends Component {
                   percent={((this.state.saturdayHours)/8)*100}
                   radius={20}
                   borderWidth={4}
-                  color="#228B22"
+                  color={this.color(Number(this.state.saturdayHours))}
                   shadowColor="#999"
                   bgColor="#fff"
                 >
@@ -427,30 +458,40 @@ class TimeSheetExpandedDetails extends Component {
                 </ProgressCircle>
               </TouchableOpacity>
               </View>
+              
             </View>
-           
+            {/* <Image style={{top:400,right:10,left:120}} source={require('../../assets/icons/Edit.png')} /> */}
+         
+       
         <FlatList 
         getItemLayout={this.getItemLayout}
         ref={(ref) => { this.flatListRef = ref; }}
-        contentContainerStyle={{ paddingBottom: 420,flexDirection:"column"}}
+        contentContainerStyle={{ paddingBottom: 630,flexDirection:"column"}}
        style={{ paddingRight: 10,paddingLeft:10, marginTop: 10 }}
         data={this.props.timesheet}
+        extraData={this.state}
         renderItem=  { ({item,index}) =>  (
              <Details
               key={index}
               data={item}
+              // onPressItem={this._onPressItem}
+              // selected={!!this.state.selected.get(item.id)}
               {...this.props} />
         )}
        
         keyExtractor={item => item.empId}>
 
         </FlatList>
+     
+        
       </SafeAreaView>
     );
 
     return <View>{content}</View>
   }
 }
+
+ 
 mapStateToProps = (state) => {
   const { days} = state
   return { timesheet: days.data,

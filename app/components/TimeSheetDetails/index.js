@@ -21,7 +21,7 @@ export default class TimeSheet extends Component {
     Navigation.push(this.props.componentId, {
         component: {
           // swipeToDismiss: true,
-          name: 'TimeSheetExpandedDetails',
+          name: 'AddTimeSheet',
           passProps: {
             response: null,
             from: this.state.from,
