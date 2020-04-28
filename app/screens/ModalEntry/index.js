@@ -19,10 +19,10 @@ class ModalScreen extends Component {
     project: null,
     hours: null,
     company: null,
-    date: new Date() ,
-    dateArray: null ,
-    month:null,
-    dateNum:null
+    date: new Date(),
+    dateArray: null,
+    month: null,
+    dateNum: null
   };
 
   textChange = (text) => {
@@ -50,136 +50,143 @@ class ModalScreen extends Component {
   //   return new Date(a.data.date).getTime() - new Date(b.data.date).getTime();
   //  }
 
-  
+
 
   onClickhandler = () => {
-  // await AsyncStorage.removeItem('@timesheet');
-  // const items = await AsyncStorage.getItem('@timesheet');
-  // console.log(items)
+    // await AsyncStorage.removeItem('@timesheet');
     // const items = await AsyncStorage.getItem('@timesheet');
-    if(this.props.sheetType==="addMoreExisting"){
+    // console.log(items)
+    // const items = await AsyncStorage.getItem('@timesheet');
+    if (this.props.sheetType === "addMoreExisting") {
       const items = this.props.timesheet;
       console.log(this.state.date)
       const datas = {
         Id: Date.now().toString(),
-       customer: this.state.customer,
-       task: this.state.task,
-       project: this.state.project,
-       hours: this.state.hours,
-       company: this.state.company,
-       date: this.props.data.date,
-       month: this.props.data.month,
-       dateNum: this.props.data.dateNum
-      //  day: this.state.date.getDay()
-     }
-    // const obj = JSON.parse(items);
-    // obj["data"].push(datas);
-    items["data"].push(datas)
-    // const obj = items;
-    // obj = this.sort(obj)
-    // debugger
-   items.data.sort( (a,b) => {
-    
-      // console.log(new Date(a.date))
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    })
-    // obj.sort(this.custom_sort);
-    // await AsyncStorage.setItem('@timesheet', JSON.stringify(obj))
-    this.dispatchProcess(items);
-    }else{
+        customer: this.state.customer,
+        task: this.state.task,
+        project: this.state.project,
+        hours: this.state.hours,
+        company: this.state.company,
+        date: this.props.data.date,
+        month: this.props.data.month,
+        dateNum: this.props.data.dateNum
+        //  day: this.state.date.getDay()
+      }
+      // const obj = JSON.parse(items);
+      // obj["data"].push(datas);
+      items["data"].push(datas)
+      // const obj = items;
+      // obj = this.sort(obj)
+      // debugger
+      items.data.sort((a, b) => {
+
+        // console.log(new Date(a.date))
+        return new Date(a.date).getTime() - new Date(b.date).getTime();
+      })
+      // obj.sort(this.custom_sort);
+      // await AsyncStorage.setItem('@timesheet', JSON.stringify(obj))
+      this.dispatchProcess(items);
+    } else {
       const items = this.props.timesheet;
       // debugger
+
+
+
+
+
       //  console.log(JSON.parse(items))
-       
-        //  console.log("outside")
-        if(items.data===null){
-       
-          const data ={"data":[{
-             Id: Date.now().toString(),
-             customer: this.state.customer,
-             task: this.state.task,
-             project: this.state.project,
-             hours: this.state.hours,
-             company: this.state.company,
-             date: this.state.date,
-             month: this.state.month,
-             dateNum: this.state.dateNum
-             
+
+      //  console.log("outside")
+      if (items.data === null) {
+
+        const data = {
+          "data": [{
+            Id: Date.now().toString(),
+            customer: this.state.customer,
+            task: this.state.task,
+            project: this.state.project,
+            hours: this.state.hours,
+            company: this.state.company,
+            date: this.state.date,
+            month: this.state.month,
+            dateNum: this.state.dateNum
+
             //  day: this.state.date.getDay()
-             
-           }]}
-          //  items["data"].push(data);
-          // await AsyncStorage.setItem('@timesheet', JSON.stringify(data));
-          this.props.submitSheet(data);
-          
-        }else{
-         
-          const datas = {
-              Id: Date.now().toString(),
-             customer: this.state.customer,
-             task: this.state.task,
-             project: this.state.project,
-             hours: this.state.hours,
-             company: this.state.company,
-             date: this.state.date,
-             month: this.state.month,
-             dateNum: this.state.dateNum
-            //  day: this.state.date.getDay()
-           }
-          // const obj = JSON.parse(items);
-          // obj["data"].push(datas);
-          items["data"].push(datas)
-          // const obj = items;
-          // obj = this.sort(obj)
-          // debugger
-         items.data.sort( (a,b) => {
-          
-            // console.log(new Date(a.date))
-            return new Date(a.date).getTime() - new Date(b.date).getTime();
-          })
-          // obj.sort(this.custom_sort);
-          // await AsyncStorage.setItem('@timesheet', JSON.stringify(obj))
-          this.dispatchProcess(items);
+
+          }]
         }
-      
+        //  items["data"].push(data);
+        // await AsyncStorage.setItem('@timesheet', JSON.stringify(data));
+        this.props.submitSheet(data);
+
+      } else {
+
+        const datas = {
+          Id: Date.now().toString(),
+          customer: this.state.customer,
+          task: this.state.task,
+          project: this.state.project,
+          hours: this.state.hours,
+          company: this.state.company,
+          date: this.state.date,
+          month: this.state.month,
+          dateNum: this.state.dateNum
+          //  day: this.state.date.getDay()
+        }
+        // const obj = JSON.parse(items);
+        // obj["data"].push(datas);
+        items["data"].push(datas)
+        // const obj = items;
+        // obj = this.sort(obj)
+        // debugger
+        items.data.sort((a, b) => {
+
+          // console.log(new Date(a.date))
+          return new Date(a.date).getTime() - new Date(b.date).getTime();
+        })
+        // obj.sort(this.custom_sort);
+        // await AsyncStorage.setItem('@timesheet', JSON.stringify(obj))
+        this.dispatchProcess(items);
+      }
+
     }
-   
-      
+
+
   }
 
 
-  dispatchProcess =  (items) => {
+  dispatchProcess = (items) => {
     this.props.submitSheet(items);
   }
 
   // sort = async (items) => {
   //       items.data.sort((a,b) => {
-      
+
   //       // console.log(new Date(a.date))
   //       return new Date(a.date).getTime() - new Date(b.date).getTime();
   //     })
   //     return items
   // }
 
-  enumerateDaysBetweenDates (startDate, endDate) {
-   
+  enumerateDaysBetweenDates(startDate, endDate) {
+
     const dates = [];
     const currDate = moment(startDate).startOf('day');
     dates.push(currDate.clone().format('YYYY-MM-DD'))
     const lastDate = moment(endDate).startOf('day');
 
-    while(currDate.add(1, 'days').diff(lastDate) < 0) {
-        // console.log(currDate.format('DD-MM-YYYY'));
-        dates.push(currDate.clone().format('YYYY-MM-DD'));
+    while (currDate.add(1, 'days').diff(lastDate) < 0) {
+      // console.log(currDate.format('DD-MM-YYYY'));
+      dates.push(currDate.clone().format('YYYY-MM-DD'));
     }
     dates.push(currDate.clone().format('YYYY-MM-DD'))
     return dates;
   };
 
   componentDidMount() {
-  
-    const array = this.enumerateDaysBetweenDates(this.props.beginDate,this.props.endDate);
-    
+
+    const array = this.enumerateDaysBetweenDates(this.props.beginDate, this.props.endDate);
+
     this.setState({
       dateArray: array
     })
@@ -206,32 +213,34 @@ class ModalScreen extends Component {
     let addMore;
     let content;
     let serviceItems;
-    if(this.state.dateArray!==null){
-      serviceItems = this.state.dateArray.map( (s, i) => {
+    if (this.state.dateArray !== null) {
+      serviceItems = this.state.dateArray.map((s, i) => {
         return <Picker.Item key={i} value={s} label={s} />
-   });
+      });
     }
-    if(this.props.sheetType==="newSheet"){
+    if (this.props.sheetType === "newSheet") {
 
-          
-    
-        newSheet = (
-          <View>
+
+
+      newSheet = (
+        <View>
           <Text>Date</Text>
           <Picker
             selectedValue={this.state.date}
-            style={{ height: 50, width: '100%'  }}
-            onValueChange={(itemValue, itemIndex) =>{
-              const dateSlice = itemValue.slice(8,10)
-              const month = itemValue.slice(5,7)
-              this.setState({ date: itemValue,dateNum: dateSlice,
-                month: this.months[month] })
-            } 
+            style={{ height: 50, width: '100%' }}
+            onValueChange={(itemValue, itemIndex) => {
+              const dateSlice = itemValue.slice(8, 10)
+              const month = itemValue.slice(5, 7)
+              this.setState({
+                date: itemValue, dateNum: dateSlice,
+                month: this.months[month]
+              })
+            }
             }>
-           {serviceItems}
+            {serviceItems}
           </Picker>
         </View>
-        )
+      )
     }
     return (
       <View style={{ padding: 20 }}>
@@ -239,7 +248,7 @@ class ModalScreen extends Component {
           <Text>Customer</Text>
           <Picker
             selectedValue={this.state.customer}
-            style={{ height: 50,width: '100%' }}
+            style={{ height: 50, width: '100%' }}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({ customer: itemValue })
             }>
@@ -251,7 +260,7 @@ class ModalScreen extends Component {
           <Text>Project</Text>
           <Picker
             selectedValue={this.state.project}
-            style={{ height: 50, width: '100%'  }}
+            style={{ height: 50, width: '100%' }}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({ project: itemValue })
             }>
@@ -263,7 +272,7 @@ class ModalScreen extends Component {
           <Text>Task</Text>
           <Picker
             selectedValue={this.state.task}
-            style={{ height: 50, width: '100%'  }}
+            style={{ height: 50, width: '100%' }}
             onValueChange={(itemValue, itemIndex) =>
               this.setState({ task: itemValue })
             }>
@@ -274,8 +283,8 @@ class ModalScreen extends Component {
         <View >
           <Text>Hours</Text>
           <TextInput placeholder='Enter Hours' onChangeText={text =>
-              this.setState({ hours: text })
-            } ></TextInput>
+            this.setState({ hours: text })
+          } ></TextInput>
         </View>
         <View>
           <Text>Company</Text>
@@ -289,7 +298,7 @@ class ModalScreen extends Component {
             <Picker.Item label="JavaScript" value="js" />
           </Picker>
         </View>
-          <View>{newSheet}</View>
+        <View>{newSheet}</View>
         <View style={{ marginTop: 10 }}>
           <Button onPress={this.onClickhandler} title='Save and Continue' />
         </View>

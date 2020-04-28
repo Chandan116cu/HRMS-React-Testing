@@ -73,7 +73,7 @@ class Details extends Component {
   }
 
  
-  async setDayMonth(date) {
+  setDayMonth(date) {
       const dateSlice = date.slice(8,10);
       const month = date.slice(5,7)
      this.setState({

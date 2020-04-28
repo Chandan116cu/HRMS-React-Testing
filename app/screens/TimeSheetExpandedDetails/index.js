@@ -15,32 +15,26 @@ export default class TimeSheetExpandedDetails extends Component {
 
   constructor(props) {
     super(props);
-    this.arr = [];
+   
   }
 
 
 
   componentDidMount() {
     if (this.props.timesheet !== null) {
-      // this.props.timesheet.map(async (item, index) => {
-      //   await this.countHours(item, index)
-      // })
-      // let data = {
-      //   day: null,
-      //   from: this.props.from,
-      //   to: this.props.to,
-      // }
-      // // this.props.fetchSheets(data)
-      // this.setState({
-      //   mondayHours: this.hours["monday"],
-      //   tuesdayHours: this.hours["tuesday"],
-      //   wednesdayHours: this.hours["wednesday"],
-      //   thursdayHours: this.hours["thursday"],
-      //   fridayHours: this.hours["friday"],
-      //   saturdayHours: this.hours["saturday"],
-      //   sundayHours: this.hours["sunday"],
-      //   isDatePickerVisible: false
-      // })
+      this.props.timesheet.map( (item, index) => {
+         this.countHours(item, index)
+      })
+      this.setState({
+        mondayHours: this.hours["monday"],
+        tuesdayHours: this.hours["tuesday"],
+        wednesdayHours: this.hours["wednesday"],
+        thursdayHours: this.hours["thursday"],
+        fridayHours: this.hours["friday"],
+        saturdayHours: this.hours["saturday"],
+        sundayHours: this.hours["sunday"],
+        isDatePickerVisible: false
+      })
     } else if (this.props.timesheet === null) {
       // this.collectData();
     }
@@ -56,14 +50,6 @@ export default class TimeSheetExpandedDetails extends Component {
       const data = await AsyncStorage.getItem('@timesheet')
       if(data !== null) {
         const newData = JSON.parse(data);
-      //  console.log("New Array")
-      //   console.log(newData)
-
-      // newData.data.sort((a,b) => {
-
-      //   // console.log(new Date(a.date))
-      //   return new Date(a.date).getTime() - new Date(b.date).getTime();
-      // })
       this.props.submitTimesheet(newData);
       }
     } catch(e) {
@@ -125,9 +111,7 @@ export default class TimeSheetExpandedDetails extends Component {
     isDatePickerVisible: false,
     refresh: false,
     dynamicIndex: 0
-    // selected: (new Map([String],[Boolean]))
-    // setDatePickerVisibility:false
-    // isLoading: false
+
   };
 
   color = (value) => {
@@ -140,7 +124,7 @@ export default class TimeSheetExpandedDetails extends Component {
     }
   }
 
-  countHours = async (data, index) => {
+  countHours =  (data, index) => {
     // debugger
     const date = new Date(data.date);
     const day = date.getDay();
@@ -302,55 +286,34 @@ export default class TimeSheetExpandedDetails extends Component {
 
   }
 
-  // handleMove = () => {
-  //   this.scroller.scrollTo({
-  //     x: 0,
-  //     y: (2*245),
-  //     animated: true
-  //   });
-  // };
-
-
-
-  // _onPressItem = (id) => {
-  //   // updater functions are preferred for transactional updates
-  //   this.setState((state) => {
-  //     // copy the map rather than modifying state.
-  //     const selected = new Map(state.selected);
-  //     selected.set(id, !selected.get(id)); // toggle
-  //     return {selected};
-  //   });
-  // };
-
 
   render() {
 
     let content;
     let list;
     let contentToShow;
-
+    this.hours["0"] = "";
     this.hours["1"] = "";
     this.hours["2"] = "";
     this.hours["3"] = "";
     this.hours["4"] = "";
     this.hours["5"] = "";
     this.hours["6"] = "";
-    this.hours["0"] = "";
+    
 
 // debugger
     if (this.props.timesheet != null) {
 
-
-      // this.props.timesheet.map(async (item, index) => {
-      //   // debugger
-      //    await this.countHours(item, index)
-      // })
-    
+      console.log(this.index)
+      this.props.timesheet.map(async (item, index) => {
+        // debugger
+          this.countHours(item, index)
+      })
+      // this.countHours(payload, index),
       contentToShow = (
        this.props.timesheet.map((payload, index) => (
-         this.countHours(payload, index),
+         
           <Details
-          // getItemLayout={this.getItemLayout}
           onLayout={event => {
             const layout = event.nativeEvent.layout;
             this.arr[index] = layout.y;
@@ -364,41 +327,11 @@ export default class TimeSheetExpandedDetails extends Component {
             {...this.props} />
         ))
       )
-       
-
-      // list = (
-
-      //   <FlatList
-      //     extraData={this.state}
-      //     getItemLayout={this.getItemLayout}
-      //     ref={(ref) => { this.flatListRef = ref; }}
-      //     contentContainerStyle={{ paddingBottom: "920", flexDirection: "column" }}
-      //     style={{ paddingRight: 10, paddingLeft: 10, marginTop: 10 }}
-      //     data={this.props.timesheet}
-
-      //     renderItem={({ item, index }) => (
-            
-      //       <Details
-      //         key={index}
-      //         data={item}
-      //         // onPressItem={this._onPressItem}
-      //         // selected={!!this.state.selected.get(item.id)}
-      //         {...this.props} />
-      //     )}
-
-      //     keyExtractor={item => item.Id}>
-
-      //   </FlatList>
-        
-      // )
+  
     } else if (this.props.timesheet === null) {
       console.log("data is null")
     }
 
-
-    // if(!this.props.loading){
-    //   this.listUpdated
-    // }
     return (<View style={{flex:1,marginLeft: 10,marginRight:10}}>
 
 
@@ -515,9 +448,7 @@ export default class TimeSheetExpandedDetails extends Component {
         </View>
 
       </View>
-      {/* <Image style={{top:400,right:10,left:120}} source={require('../../assets/icons/Edit.png')} /> */}
-
-      {/* <View >{list}</View>  */}
+     
       <ScrollView style={{flex: 1,marginTop:10}} scrollToOverflowEnabled={true}  ref={scroller => {
             this.scroller = scroller;
           }}
@@ -525,18 +456,3 @@ export default class TimeSheetExpandedDetails extends Component {
     </View>)
   }
 }
-
-// ref={(ref) => { this.flatListRef = ref; }}
-// mapStateToProps = (state) => {
-//   const { draftedSheets } = state
-//   return {
-//     timesheet: draftedSheets.data.data,
-//     loading: draftedSheets.isLoading
-//   }
-// }
-
-// const mapDispatchToProps = dispatch => bindActionCreators({
-//   submitTimesheet
-// }, dispatch)
-
-// export default connect(mapStateToProps, mapDispatchToProps)(TimeSheetExpandedDetails)
