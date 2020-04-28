@@ -399,10 +399,10 @@ export default class TimeSheetExpandedDetails extends Component {
     // if(!this.props.loading){
     //   this.listUpdated
     // }
-    return (<SafeAreaView>
+    return (<View style={{flex:1,marginLeft: 10,marginRight:10}}>
 
 
-      <View style={{ flexDirection: "column", justifyContent: "space-evenly", padding: 10, borderRadius: 10, borderWidth: 1, marginLeft: 10, marginRight: 10, marginTop: 10, borderColor: 'grey' }}>
+      <View style={{ flexDirection: "column",padding:10, justifyContent: "space-evenly",  borderRadius: 10, borderWidth: 1,  marginTop: 10, borderColor: 'grey' }}>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }} >
           <Text style={{ fontSize: 11 }}>S</Text>
           <Text style={{ fontSize: 11 }}>M</Text>
@@ -518,11 +518,11 @@ export default class TimeSheetExpandedDetails extends Component {
       {/* <Image style={{top:400,right:10,left:120}} source={require('../../assets/icons/Edit.png')} /> */}
 
       {/* <View >{list}</View>  */}
-      <ScrollView  scrollToOverflowEnabled={true}  ref={scroller => {
+      <ScrollView style={{flex: 1,marginTop:10}} scrollToOverflowEnabled={true}  ref={scroller => {
             this.scroller = scroller;
           }}
-          ><View style={{ padding: 10, marginRight: 0, marginBottom: 420 }}>{contentToShow}</View></ScrollView> 
-    </SafeAreaView>)
+          >{contentToShow}</ScrollView> 
+    </View>)
   }
 }
 

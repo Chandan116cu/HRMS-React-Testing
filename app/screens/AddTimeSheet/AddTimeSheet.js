@@ -209,7 +209,7 @@ class AddTimeSheet extends Component {
   }
   render() {
     return (
-      <View>
+      <View style={{flex:1}}>
         <View style={{ flexDirection: "row", borderWidth: 1, borderRadius: 10, borderColor: 'grey', marginLeft: 10, marginRight: 10, marginTop: 10 }}>
           <View style={{ width: '50%', padding: 15, borderRightWidth: 1 }}>
             <TouchableOpacity onPress={() => { this.showDatePicker("Begin") }}>
