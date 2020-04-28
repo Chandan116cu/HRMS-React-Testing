@@ -14,7 +14,10 @@ export  function SubmitSheets(data) {
 
       dispatch(Loading()) 
     
+      // setTimeout(()=>{
         dispatch(success(data));
+      // },5000)
+        
 
  
       // console.log("error")

@@ -15,15 +15,15 @@ export default class TimeSheetExpandedDetails extends Component {
 
   constructor(props) {
     super(props);
-   
+
   }
 
 
 
   componentDidMount() {
     if (this.props.timesheet !== null) {
-      this.props.timesheet.map( (item, index) => {
-         this.countHours(item, index)
+      this.props.timesheet.map((item, index) => {
+        this.countHours(item, index)
       })
       this.setState({
         mondayHours: this.hours["monday"],
@@ -48,11 +48,11 @@ export default class TimeSheetExpandedDetails extends Component {
   getData = async () => {
     try {
       const data = await AsyncStorage.getItem('@timesheet')
-      if(data !== null) {
+      if (data !== null) {
         const newData = JSON.parse(data);
-      this.props.submitTimesheet(newData);
+        this.props.submitTimesheet(newData);
       }
-    } catch(e) {
+    } catch (e) {
       // error reading value
       console.log("Error in storage")
     }
@@ -62,7 +62,7 @@ export default class TimeSheetExpandedDetails extends Component {
   async collectData() {
 
     this.getData;
-   
+
   }
 
   index = {
@@ -124,7 +124,7 @@ export default class TimeSheetExpandedDetails extends Component {
     }
   }
 
-  countHours =  (data, index) => {
+  countHours = (data, index) => {
     // debugger
     const date = new Date(data.date);
     const day = date.getDay();
@@ -139,6 +139,8 @@ export default class TimeSheetExpandedDetails extends Component {
       if (this.index["tuesdayIndex"] === "") {
         this.index["tuesdayIndex"] = index;
       }
+
+
       this.hours[day] = Number(this.hours[day]) + Number(data.hours);
     } else if (day === 3) {
 
@@ -146,7 +148,7 @@ export default class TimeSheetExpandedDetails extends Component {
         this.index["wednesdayIndex"] = index;
       }
       this.hours[day] = Number(this.hours[day]) + Number(data.hours);
-    } else if (day=== 4) {
+    } else if (day === 4) {
       if (this.index["thursdayIndex"] === "") {
         this.index["thursdayIndex"] = index;
       }
@@ -181,7 +183,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -196,7 +198,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -205,11 +207,11 @@ export default class TimeSheetExpandedDetails extends Component {
 
   scrollToIndexWed = () => {
     // console.log(this.index)
-   debugger
+    debugger
     if (this.index["wednesdayIndex"] === "") {
       return;
     } else {
-      
+
       let randomIndex = Number(this.index["wednesdayIndex"]);
       // console.log(this.arr)
       // console.log(this.arr[randomIndex])
@@ -217,7 +219,7 @@ export default class TimeSheetExpandedDetails extends Component {
       //   y: this.arr[randomIndex], animated: true });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -234,7 +236,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -249,7 +251,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -264,7 +266,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -279,7 +281,7 @@ export default class TimeSheetExpandedDetails extends Component {
       // this.flatListRef.scrollTo({ animated: true, index: randomIndex });
       this.scroller.scrollTo({
         x: 0,
-        y: randomIndex*242,
+        y: randomIndex * 242,
         animated: true
       });
     }
@@ -299,43 +301,50 @@ export default class TimeSheetExpandedDetails extends Component {
     this.hours["4"] = "";
     this.hours["5"] = "";
     this.hours["6"] = "";
-    
 
-// debugger
+
+    // debugger
     if (this.props.timesheet != null) {
+      this.index["fridayIndex"] = "";
+      this.index["mondayIndex"] = "";
+      this.index["saturdayIndex"] = "";
+      this.index["sundayIndex"] = "";
+      this.index["thursdayIndex"] = "";
+      this.index["tuesdayIndex"] = "";
+      this.index["wednesdayIndex"] = "";
 
       console.log(this.index)
       this.props.timesheet.map(async (item, index) => {
         // debugger
-          this.countHours(item, index)
+        this.countHours(item, index)
       })
       // this.countHours(payload, index),
       contentToShow = (
-       this.props.timesheet.map((payload, index) => (
-         
+        this.props.timesheet.map((payload, index) => (
+
           <Details
-          onLayout={event => {
-            const layout = event.nativeEvent.layout;
-            this.arr[index] = layout.y;
-            console.log('height:', layout.height);
-            console.log('width:', layout.width);
-            console.log('x:', layout.x);
-            console.log('y:', layout.y);
-          }}
+            onLayout={event => {
+              const layout = event.nativeEvent.layout;
+              this.arr[index] = layout.y;
+              console.log('height:', layout.height);
+              console.log('width:', layout.width);
+              console.log('x:', layout.x);
+              console.log('y:', layout.y);
+            }}
             key={index}
             data={payload}
             {...this.props} />
         ))
       )
-  
+
     } else if (this.props.timesheet === null) {
       console.log("data is null")
     }
 
-    return (<View style={{flex:1,marginLeft: 10,marginRight:10}}>
+    return (<View style={{ flex: 1, marginLeft: 10, marginRight: 10 }}>
 
 
-      <View style={{ flexDirection: "column",padding:10, justifyContent: "space-evenly",  borderRadius: 10, borderWidth: 1,  marginTop: 10, borderColor: 'grey' }}>
+      <View style={{ flexDirection: "column", padding: 10, justifyContent: "space-evenly", borderRadius: 10, borderWidth: 1, marginTop: 10, borderColor: 'grey' }}>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }} >
           <Text style={{ fontSize: 11 }}>S</Text>
           <Text style={{ fontSize: 11 }}>M</Text>
@@ -348,7 +357,7 @@ export default class TimeSheetExpandedDetails extends Component {
           <Text style={{ fontSize: 11 }}>S</Text>
         </View>
         <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
-        
+
           <TouchableOpacity onPress={this.scrollToIndexSun}>
             <ProgressCircle
 
@@ -364,7 +373,7 @@ export default class TimeSheetExpandedDetails extends Component {
 
             </ProgressCircle>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={this.scrollToIndexMon}>
             <ProgressCircle
               percent={((this.hours["1"]) / 8) * 100}
@@ -378,8 +387,8 @@ export default class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>{this.hours["1"]}</Text>
             </ProgressCircle>
           </TouchableOpacity>
-         
-          <TouchableOpacity  onPress={this.scrollToIndexTue}>
+
+          <TouchableOpacity onPress={this.scrollToIndexTue}>
             <ProgressCircle
               percent={((this.hours["2"]) / 8) * 100}
               radius={20}
@@ -391,7 +400,7 @@ export default class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>{this.hours["2"]}</Text>
             </ProgressCircle>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={this.scrollToIndexWed} >
             <ProgressCircle
               percent={((this.hours["3"]) / 8) * 100}
@@ -406,7 +415,7 @@ export default class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>{this.hours["3"]}</Text>
             </ProgressCircle>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={this.scrollToIndexThur}>
             <ProgressCircle
               percent={((this.hours["4"]) / 8) * 100}
@@ -419,7 +428,7 @@ export default class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>{this.hours["4"]}</Text>
             </ProgressCircle>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={this.scrollToIndexFri}>
             <ProgressCircle
               percent={((this.hours["5"]) / 8) * 100}
@@ -432,7 +441,7 @@ export default class TimeSheetExpandedDetails extends Component {
               <Text style={{ fontSize: 11 }}>{this.hours["5"]}</Text>
             </ProgressCircle>
           </TouchableOpacity>
-          
+
           <TouchableOpacity onPress={this.scrollToIndexSat}>
             <ProgressCircle
               percent={((this.hours["6"]) / 8) * 100}
@@ -448,11 +457,11 @@ export default class TimeSheetExpandedDetails extends Component {
         </View>
 
       </View>
-     
-      <ScrollView style={{flex: 1,marginTop:10}} scrollToOverflowEnabled={true}  ref={scroller => {
-            this.scroller = scroller;
-          }}
-          >{contentToShow}</ScrollView> 
+
+      <ScrollView style={{ flex: 1, marginTop: 10 }} scrollToOverflowEnabled={true} ref={scroller => {
+        this.scroller = scroller;
+      }}
+      >{contentToShow}</ScrollView>
     </View>)
   }
 }

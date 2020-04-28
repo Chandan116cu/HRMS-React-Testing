@@ -22,11 +22,14 @@ Navigation.events().registerAppLaunchedListener(() => {
          children: [
           {
              component: {
-               name: 'AddTimeSheet'
-             }
+               name: 'DashBoard'
+             },
+             
            }  
-         ]
-       }
+         ],
+         options:{ topBar: { visible: true,title:{text:"Time Sheet Entry",alignment:"center"}} }
+       },
+       
     }
   });
 });
