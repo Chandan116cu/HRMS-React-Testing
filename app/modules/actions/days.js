@@ -3,7 +3,7 @@ import { GET_TIMESHEET_DATA } from '../../constants'
 import { ERROR_TIMESHEET_DATA } from '../../constants'
 import { LOADING_TIMESHEET_DATA } from '../../constants'
 
-export const days = (data) => {
+export const success = (data) => {
   return {
       type: GET_TIMESHEET_DATA,
       payload: data

@@ -28,44 +28,44 @@ export default class TimeSheet extends Component {
             to: this.state.to
           },
            options: {
-            animations: {
-              pop: {
-                  content: {
-                      alpha: {
-                          from: 1,
-                          to: 0,
-                          duration: 300,
-                          startDelay: 0,
-                          interpolation: 'decelerate',
-                      },
-                  },
-              },
-              push: {
-                  waitForRender: true,
-                  content: {
-                      alpha: {
-                          from: 0,
-                          to: 1,
-                          duration: 300,
-                          startDelay: 0,
-                          interpolation: 'accelerate',
-                      },
-                      // scaleX: {
-                      //   from: 0,
-                      //   to: 1,
-                      //   duration: 300,
-                      //   interpolation: "accelerate",
-                      // },
-                    //   x: {
-                    //     from: 1,
-                    //     to: 0,
-                    //     duration: 300,
-                    //     startDelay: 0,
-                    //     interpolation: 'accelerate',
-                    // },
-                  },
-              },
-          },
+          //   animations: {
+          //     pop: {
+          //         content: {
+          //             alpha: {
+          //                 from: 1,
+          //                 to: 0,
+          //                 duration: 300,
+          //                 startDelay: 0,
+          //                 interpolation: 'decelerate',
+          //             },
+          //         },
+          //     },
+          //     push: {
+          //         waitForRender: true,
+          //         content: {
+          //             alpha: {
+          //                 from: 0,
+          //                 to: 1,
+          //                 duration: 300,
+          //                 startDelay: 0,
+          //                 interpolation: 'accelerate',
+          //             },
+          //             // scaleX: {
+          //             //   from: 0,
+          //             //   to: 1,
+          //             //   duration: 300,
+          //             //   interpolation: "accelerate",
+          //             // },
+          //           //   x: {
+          //           //     from: 1,
+          //           //     to: 0,
+          //           //     duration: 300,
+          //           //     startDelay: 0,
+          //           //     interpolation: 'accelerate',
+          //           // },
+          //         },
+          //     },
+          // },
             topBar: {
               title: {
                 text: "Add Timesheet ",

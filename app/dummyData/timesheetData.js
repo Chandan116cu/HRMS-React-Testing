@@ -9,7 +9,7 @@ var data = [
         "hours":"7",
         "company":"Cyber India--Cyber Group India Pvt Ltd",
         "to":"23-09-2020",
-        "from":"Jan 13",
+        "date":"Jan 13",
         "status":"pending",
         "day":"monday"
     },
@@ -21,7 +21,7 @@ var data = [
         "hours":"5",
         "company":"Cyber",
         "to":"Feb 09",
-        "from":"Feb 09",
+        "date":"Feb 09",
         "status":"pending",
         "day":"monday"
     },
@@ -33,7 +33,7 @@ var data = [
         "hours":"1",
         "company":"cyber",
         "to":"Mar 23",
-        "from":"Mar 23",
+        "date":"Mar 23",
         "status":"rejected",
         "day":"tuesday"
     },
@@ -45,7 +45,7 @@ var data = [
         "hours":"8",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"tuesday"
     },
@@ -57,7 +57,7 @@ var data = [
         "hours":"1",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"Apr 12",
+        "date":"Apr 12",
         "status":"approved",
         "day":"wednesday"
     },
@@ -69,7 +69,7 @@ var data = [
         "hours":"1",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"wednesday"
     },
@@ -81,7 +81,7 @@ var data = [
         "hours":"92",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"May 4",
+        "date":"May 4",
         "status":"approved",
         "day":"thursday"
     },
@@ -93,7 +93,7 @@ var data = [
         "hours":"92",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"May 4",
+        "date":"May 4",
         "status":"approved",
         "day":"friday"
     },
@@ -105,7 +105,7 @@ var data = [
         "hours":"92",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"May 4",
+        "date":"May 4",
         "status":"approved",
         "day":"friday"
     },
@@ -117,7 +117,7 @@ var data = [
         "hours":"26",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"saturday"
     },
@@ -130,7 +130,7 @@ var data = [
         "hours":"2",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"sunday"
     },
@@ -142,7 +142,7 @@ var data = [
         "hours":"86",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"sunday"
     },
@@ -154,7 +154,7 @@ var data = [
         "hours":"86",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"sunday"
     },
@@ -166,7 +166,7 @@ var data = [
         "hours":"86",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"sunday"
     },
@@ -178,7 +178,7 @@ var data = [
         "hours":"86",
         "company":"Cyber",
         "to":"23-07-2020",
-        "from":"12-06-2020",
+        "date":"12-06-2020",
         "status":"approved",
         "day":"sunday"
     },
