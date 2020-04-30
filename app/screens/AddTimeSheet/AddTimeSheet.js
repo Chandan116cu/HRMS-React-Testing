@@ -179,7 +179,7 @@ class AddTimeSheet extends Component {
 
 
   
-  onClickHandler = async () => {
+  onClickHandler = () => {
    
     // onst datesArray = this.enumerateDaysBetweenDates(this.state.);
   

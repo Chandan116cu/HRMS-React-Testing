@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, Dimensions, View, TouchableOpacity, SafeAreaView, FlatList, ScrollView } from 'react-native';
+import { Text, Dimensions, View, TouchableOpacity, SafeAreaView, FlatList, ScrollView, Button } from 'react-native';
 import ProgressCircle from 'react-native-progress-circle';
 
 import Details from '../../components/Details';
@@ -293,6 +293,8 @@ export default class TimeSheetExpandedDetails extends Component {
 
     let content;
     let list;
+    let saveAsDraft;
+    let saveButton;
     let contentToShow;
     this.hours["0"] = "";
     this.hours["1"] = "";
@@ -313,29 +315,37 @@ export default class TimeSheetExpandedDetails extends Component {
       this.index["tuesdayIndex"] = "";
       this.index["wednesdayIndex"] = "";
 
-      console.log(this.index)
-      this.props.timesheet.map(async (item, index) => {
-        // debugger
-        this.countHours(item, index)
-      })
+      // console.log(this.index)
+      // this.props.timesheet.map(async (item, index) => {
+      //   // debugger
+        
+      // })
       // this.countHours(payload, index),
+
+      saveAsDraft = (
+
+        <TouchableOpacity>
+            <View>
+              
+            </View>
+        </TouchableOpacity>
+        
+      )
+
+      saveButton = (
+        <Button title="Submit"></Button>
+      )
+
       contentToShow = (
         this.props.timesheet.map((payload, index) => (
-
-          <Details
-            onLayout={event => {
-              const layout = event.nativeEvent.layout;
-              this.arr[index] = layout.y;
-              console.log('height:', layout.height);
-              console.log('width:', layout.width);
-              console.log('x:', layout.x);
-              console.log('y:', layout.y);
-            }}
+          this.countHours(payload, index),
+          <Details           
             key={index}
             data={payload}
             {...this.props} />
         ))
       )
+
 
     } else if (this.props.timesheet === null) {
       console.log("data is null")
@@ -461,7 +471,14 @@ export default class TimeSheetExpandedDetails extends Component {
       <ScrollView style={{ flex: 1, marginTop: 10 }} scrollToOverflowEnabled={true} ref={scroller => {
         this.scroller = scroller;
       }}
-      >{contentToShow}</ScrollView>
+      >
+        {contentToShow}
+        
+        {saveAsDraft}
+        {saveButton}
+        
+        
+        </ScrollView>
     </View>)
   }
 }

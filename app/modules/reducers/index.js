@@ -8,7 +8,7 @@ import submitTimesheet from './submitSheets'
 const rootReducer = combineReducers({
    //TODO
    // timeSheets : daysTimesheet,
-   // days : days,
+   timeSheetsList : days,
    draftedSheets: submitTimesheet 
 })
 

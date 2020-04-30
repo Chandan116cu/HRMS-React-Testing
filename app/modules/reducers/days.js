@@ -4,8 +4,8 @@ import { LOADING_TIMESHEET_DATA } from '../../constants'
 // import Immutable from 'imm';
 import data from '../../dummyData/timesheetData'
 const initialState = {
-  data: data,
-  isLoading: false,
+  data: {statusCode:null},
+  isLoading: true,
 }
 const days = (state = initialState, action) => {
   switch (action.type) {

@@ -93,7 +93,7 @@ export default class TimeSheet extends Component {
               <View style={styles.details}>
                   <View style={styles.from}>
                       <Text>From</Text>
-                      <Text style={styles.fromText}>{this.props.data.from}</Text>
+                      <Text style={styles.fromText}></Text>
                   </View>
                   <View style={styles.to}>
                       <Text>To</Text>

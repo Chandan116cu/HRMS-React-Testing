@@ -3,6 +3,7 @@ import DashBoard from './DashBoard'
 import TimeSheetExpandedDetails from './TimeSheetExpandedDetails'
 import AddTimeSheet from './AddTimeSheet/AddTimeSheet'
 import ModalScreen from './ModalEntry'
+import MySubmissions from './MySubmissions'
 
 
 // import ModalScreen from './ModalEntry'
@@ -12,7 +13,8 @@ export function registerScreens(store, Provider) {
       DashBoard,
       TimeSheetExpandedDetails,
      AddTimeSheet,
-     ModalScreen
+     ModalScreen,
+     MySubmissions
       // ModalScreen
 
    }

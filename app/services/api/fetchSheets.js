@@ -1,13 +1,14 @@
-import {days,error,Loading} from '../../modules/actions/days';
+import {success,error,Loading} from '../../modules/actions/days';
 import {GET_TIMESHEET} from '../../services/api/api'
 import {BASE_URL_IDENTITY} from '../../config'
 import {GET_SHEET_ROUTE} from '../../constants'
+// import { success } from '../../modules/actions/submitSheets';
 
 export function fetchSheets(data) {
-    let formdata = new FormData();
-    formdata.append('from',data.from)
-    formdata.append('to',data.to)
-    formdata.append('day',data.day)
+    // let formdata = new FormData();
+    // formdata.append('from',data.from)
+    // formdata.append('to',data.to)
+    // formdata.append('day',data.day)
     
     return (dispatch) =>  {
       dispatch(Loading());
@@ -18,7 +19,7 @@ export function fetchSheets(data) {
     'Content-Type': 'application/json',
         'cache': "no-cache",
         type: 'application/json',
-        'body': formdata
+        // 'body': formdata
       },
     })
     .then((response)=>{
@@ -28,7 +29,7 @@ export function fetchSheets(data) {
       return {'error':'400'};
       }
     }).then(async function(response){
-      dispatch(days(response));
+      dispatch(success(response));
   })
     .catch(error => { console.log('request failed', error); });
     }
